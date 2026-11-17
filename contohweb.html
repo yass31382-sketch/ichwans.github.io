@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bali Trip - Paket Tour, Hotel & Aktivitas</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    color: #1f2937;
+    line-height: 1.6;
+    background: #fff;
+  }
+  a { text-decoration: none; color: inherit; }
+  img { display: block; max-width: 100%; }
+
+  /* ===== HEADER ===== */
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    padding: 14px 0;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+  .nav { display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-size: 22px; font-weight: 800; color: #0e7490; }
+  .logo span { color: #f59e0b; }
+  nav ul { display: flex; gap: 28px; list-style: none; }
+  nav a { font-size: 14px; font-weight: 500; color: #4b5563; transition: color .2s; }
+  nav a:hover { color: #0e7490; }
+  .btn {
+    display: inline-block; padding: 11px 22px;
+    border-radius: 8px; font-weight: 600; font-size: 14px;
+    cursor: pointer; border: none; transition: all .25s;
+    text-align: center;
+  }
+  .btn-primary { background: #0e7490; color: #fff; }
+  .btn-primary:hover { background: #155e75; transform: translateY(-2px); }
+  .btn-outline { background: transparent; border: 2px solid #0e7490; color: #0e7490; }
+  .btn-outline:hover { background: #0e7490; color: #fff; }
+  .btn-wa { background: #25d366; color: #fff; }
+  .btn-wa:hover { background: #1ebe5a; }
+  .hamburger { display: none; font-size: 26px; cursor: pointer; color: #0e7490; }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    min-height: 560px;
+    display: flex; align-items: center;
+    background: linear-gradient(135deg, rgba(14,116,144,0.85), rgba(15,118,110,0.75)),
+                url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1600&q=80') center/cover;
+    color: #fff;
+    padding: 80px 0 60px;
+  }
+  .hero-content { max-width: 780px; }
+  .hero h1 {
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 800; line-height: 1.15; margin-bottom: 18px;
+  }
+  .hero h1 span { color: #fbbf24; }
+  .hero p { font-size: 17px; opacity: .95; margin-bottom: 30px; max-width: 600px; }
+  .search-box {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    background: #fff; padding: 10px; border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+    max-width: 720px;
+  }
+  .search-box input, .search-box select {
+    flex: 1; min-width: 140px;
+    padding: 12px 14px; border: 1px solid #e5e7eb;
+    border-radius: 8px; font-size: 14px; outline: none;
+    color: #1f2937;
+  }
+  .search-box input:focus, .search-box select:focus { border-color: #0e7490; }
+  .search-box .btn { padding: 12px 28px; }
+
+  /* ===== PARTNER LOGOS ===== */
+  .partners {
+    background: #f9fafb; padding: 28px 0;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  .partners p {
+    text-align: center; font-size: 13px; color: #6b7280;
+    margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px;
+  }
+  .partner-logos {
+    display: flex; justify-content: center; align-items: center;
+    flex-wrap: wrap; gap: 36px;
+  }
+  .partner-logos div {
+    font-size: 20px; font-weight: 800; color: #9ca3af;
+    transition: all .3s; cursor: pointer;
+  }
+  .partner-logos div:hover { color: #0e7490; transform: scale(1.08); }
+
+  /* ===== SECTION GENERAL ===== */
+  section { padding: 70px 0; }
+  .section-title { text-align: center; margin-bottom: 40px; }
+  .section-title h2 {
+    font-size: clamp(26px, 4vw, 36px);
+    font-weight: 800; color: #0f172a; margin-bottom: 10px;
+  }
+  .section-title p { color: #6b7280; font-size: 15px; max-width: 600px; margin: 0 auto; }
+
+  /* ===== CATEGORIES ===== */
+  .categories { background: #fff; }
+  .cat-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  .cat-card {
+    border-radius: 14px; overflow: hidden; position: relative;
+    height: 200px; display: flex; align-items: flex-end;
+    padding: 22px; color: #fff; cursor: pointer;
+    background-size: cover; background-position: center;
+    transition: transform .3s, box-shadow .3s;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+  }
+  .cat-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0.1));
+  }
+  .cat-card:hover { transform: translateY(-6px); box-shadow: 0 14px 30px rgba(0,0,0,0.2); }
+  .cat-card h3 { position: relative; font-size: 20px; font-weight: 700; }
+  .cat-card p { position: relative; font-size: 13px; opacity: .9; }
+  .cat-1 { background-image: url('https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=600&q=80'); }
+  .cat-2 { background-image: url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&q=80'); }
+  .cat-3 { background-image: url('https://images.unsplash.com/photo-1531592937781-344ad608fabf?w=600&q=80'); }
+  .cat-4 { background-image: url('https://images.unsplash.com/photo-1544644181-1484b3fdfc62?w=600&q=80'); }
+
+  /* ===== PACKAGES ===== */
+  .packages { background: #f9fafb; }
+  .filter-tabs {
+    display: flex; justify-content: center; flex-wrap: wrap;
+    gap: 10px; margin-bottom: 36px;
+  }
+  .filter-tabs button {
+    padding: 9px 18px; border: 1px solid #e5e7eb;
+    background: #fff; border-radius: 30px;
+    font-size: 13px; font-weight: 500; cursor: pointer;
+    transition: all .2s; color: #4b5563;
+  }
+  .filter-tabs button.active,
+  .filter-tabs button:hover {
+    background: #0e7490; color: #fff; border-color: #0e7490;
+  }
+  .pkg-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 24px;
+  }
+  .pkg-card {
+    background: #fff; border-radius: 14px; overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    transition: transform .3s, box-shadow .3s;
+    display: flex; flex-direction: column;
+  }
+  .pkg-card:hover { transform: translateY(-6px); box-shadow: 0 16px 34px rgba(0,0,0,0.12); }
+  .pkg-img {
+    position: relative; height: 190px; overflow: hidden;
+    background-size: cover; background-position: center;
+  }
+  .pkg-badge {
+    position: absolute; top: 12px; left: 12px;
+    background: #f59e0b; color: #fff;
+    padding: 4px 10px; border-radius: 6px;
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase;
+  }
+  .pkg-partner {
+    position: absolute; top: 12px; right: 12px;
+    background: rgba(255,255,255,0.95);
+    padding: 4px 10px; border-radius: 6px;
+    font-size: 11px; font-weight: 600; color: #0e7490;
+  }
+  .pkg-body { padding: 18px; flex: 1; display: flex; flex-direction: column; }
+  .pkg-body h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; color: #0f172a; }
+  .pkg-meta { font-size: 13px; color: #6b7280; margin-bottom: 12px; }
+  .pkg-meta span { margin-right: 12px; }
+  .pkg-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: auto; padding-top: 14px; border-top: 1px solid #f1f5f9;
+  }
+  .pkg-price { font-size: 12px; color: #6b7280; }
+  .pkg-price strong { display: block; font-size: 18px; color: #0e7490; font-weight: 800; }
+  .pkg-footer .btn { padding: 8px 16px; font-size: 13px; }
+
+  /* ===== WHY US ===== */
+  .why { background: #fff; }
+  .why-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 26px;
+  }
+  .why-item {
+    text-align: center; padding: 30px 20px;
+    border-radius: 14px; transition: background .2s;
+  }
+  .why-item:hover { background: #f0fdfa; }
+  .why-icon {
+    width: 62px; height: 62px; border-radius: 50%;
+    background: linear-gradient(135deg, #0e7490, #14b8a6);
+    color: #fff; font-size: 28px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+  }
+  .why-item h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+  .why-item p { font-size: 14px; color: #6b7280; }
+
+  /* ===== TESTIMONIALS ===== */
+  .testimonials { background: #f9fafb; }
+  .testi-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 22px;
+  }
+  .testi-card {
+    background: #fff; padding: 26px; border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+  }
+  .stars { color: #f59e0b; margin-bottom: 12px; font-size: 15px; }
+  .testi-card p { font-size: 14px; color: #4b5563; margin-bottom: 16px; font-style: italic; }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: linear-gradient(135deg, #0e7490, #14b8a6);
+    color: #fff; display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+  }
+  .testi-author strong { display: block; font-size: 14px; }
+  .testi-author span { font-size: 12px; color: #6b7280; }
+
+  /* ===== BLOG ===== */
+  .blog { background: #fff; }
+  .blog-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .blog-card {
+    border-radius: 14px; overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    transition: transform .3s;
+    cursor: pointer;
+  }
+  .blog-card:hover { transform: translateY(-6px); }
+  .blog-img {
+    height: 180px; background-size: cover; background-position: center;
+  }
+  .blog-body { padding: 20px; }
+  .blog-tag {
+    display: inline-block; font-size: 11px; font-weight: 700;
+    color: #0e7490; background: #ecfeff;
+    padding: 3px 10px; border-radius: 20px; margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  .blog-body h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: #0f172a; }
+  .blog-body p { font-size: 13px; color: #6b7280; }
+
+  /* ===== CTA ===== */
+  .cta {
+    background: linear-gradient(135deg, #0e7490, #14b8a6);
+    color: #fff; text-align: center;
+  }
+  .cta h2 { font-size: clamp(26px, 4vw, 36px); font-weight: 800; margin-bottom: 14px; }
+  .cta p { font-size: 16px; opacity: .95; margin-bottom: 26px; max-width: 600px; margin-left: auto; margin-right: auto; }
+  .cta .btn-primary { background: #f59e0b; }
+  .cta .btn-primary:hover { background: #d97706; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: #0f172a; color: #cbd5e1; padding: 50px 0 20px;
+    font-size: 14px;
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 30px; margin-bottom: 30px;
+  }
+  .footer-grid h4 { color: #fff; font-size: 15px; margin-bottom: 14px; font-weight: 700; }
+  .footer-grid ul { list-style: none; }
+  .footer-grid li { margin-bottom: 8px; }
+  .footer-grid a { color: #94a3b8; transition: color .2s; }
+  .footer-grid a:hover { color: #fbbf24; }
+  .footer-logo { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 10px; }
+  .footer-logo span { color: #fbbf24; }
+  .disclaimer {
+    background: rgba(255,255,255,0.05);
+    padding: 14px 18px; border-radius: 8px; font-size: 12px;
+    color: #94a3b8; margin-bottom: 20px; line-height: 1.6;
+  }
+  .footer-bottom {
+    text-align: center; padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 13px; color: #64748b;
+  }
+
+  /* ===== FLOATING WA ===== */
+  .float-wa {
+    position: fixed; bottom: 24px; right: 24px; z-index: 200;
+    background: #25d366; color: #fff;
+    width: 60px; height: 60px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 30px; box-shadow: 0 8px 24px rgba(37,211,102,0.4);
+    transition: transform .25s; animation: pulse 2s infinite;
+    cursor: pointer;
+  }
+  .float-wa:hover { transform: scale(1.1); }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 8px 24px rgba(37,211,102,0.4); }
+    50% { box-shadow: 0 8px 30px rgba(37,211,102,0.7); }
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    nav ul { display: none; position: absolute; top: 100%; left: 0; right: 0;
+      background: #fff; flex-direction: column; padding: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1); gap: 16px; }
+    nav ul.open { display: flex; }
+    .hamburger { display: block; }
+    .header-cta { display: none; }
+    .hero { min-height: 480px; padding: 60px 0; }
+    .search-box { flex-direction: column; }
+    .search-box input, .search-box select { width: 100%; }
+    .footer-grid { grid-template-columns: 1fr; }
+    section { padding: 50px 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="container nav">
+    <div class="logo">Bali<span>Trips</span></div>
+    <nav>
+      <ul id="menu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#paket">Paket Tour</a></li>
+        <li><a href="#kategori">Hotel</a></li>
+        <li><a href="#kategori">Aktivitas</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#kontak">Kontak</a></li>
+      </ul>
+    </nav>
+    <a href="#paket" class="btn btn-primary header-cta">Pesan Sekarang</a>
+    <div class="hamburger" onclick="document.getElementById('menu').classList.toggle('open')">☰</div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="container hero-content">
+    <h1>Temukan <span>Paket Tour Bali</span> Terbaik, Booking Aman via Mitra Resmi</h1>
+    <p>Katalog lengkap tour, hotel, aktivitas, dan transportasi. Pesan langsung melalui Traveloka, tiket.com, Agoda, atau Booking.com.</p>
+    <div class="search-box">
+      <input type="text" placeholder="Mau ke mana? (Ubud, Nusa Penida...)">
+      <select>
+        <option>Semua Kategori</option>
+        <option>Paket Tour</option>
+        <option>Hotel</option>
+        <option>Aktivitas</option>
+        <option>Transportasi</option>
+      </select>
+      <button class="btn btn-primary">Cari</button>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<div class="partners">
+  <div class="container">
+    <p>Booking aman melalui mitra resmi</p>
+    <div class="partner-logos">
+      <div>Traveloka</div>
+      <div>tiket.com</div>
+      <div>Agoda</div>
+      <div>Booking.com</div>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section class="categories" id="kategori">
+  <div class="container">
+    <div class="section-title">
+      <h2>Jelajahi Kategori</h2>
+      <p>Pilih pengalaman yang paling sesuai dengan gaya liburan Anda</p>
+    </div>
+    <div class="cat-grid">
+      <div class="cat-card cat-1"><div><h3>Paket Tour</h3><p>30+ paket tersedia</p></div></div>
+      <div class="cat-card cat-2"><div><h3>Hotel & Villa</h3><p>Cek harga terbaik</p></div></div>
+      <div class="cat-card cat-3"><div><h3>Aktivitas</h3><p>Tiket & pengalaman</p></div></div>
+      <div class="cat-card cat-4"><div><h3>Transportasi</h3><p>Car hire & transfer</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="packages" id="paket">
+  <div class="container">
+    <div class="section-title">
+      <h2>Paket Tour Populer</h2>
+      <p>Harga transparan, booking langsung ke mitra resmi</p>
+    </div>
+    <div class="filter-tabs">
+      <button class="active">Semua</button>
+      <button>Ubud</button>
+      <button>Nusa Penida</button>
+      <button>Kintamani</button>
+      <button>Uluwatu</button>
+    </div>
+    <div class="pkg-grid" id="pkgGrid">
+      <!-- Cards injected via JS -->
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why">
+  <div class="container">
+    <div class="section-title">
+      <h2>Kenapa Pesan di Sini?</h2>
+      <p>Kami bantu Anda menemukan paket terbaik dari platform terpercaya</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="why-icon">🔒</div>
+        <h3>Transaksi Aman</h3>
+        <p>Pembayaran diproses langsung oleh platform mitra resmi bersertifikat.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">💰</div>
+        <h3>Harga Kompetitif</h3>
+        <p>Bandingkan harga dari beberapa mitra dalam satu halaman.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">⚡</div>
+        <h3>Booking Instan</h3>
+        <p>Konfirmasi cepat, tanpa perlu menunggu balasan manual.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon">🎧</div>
+        <h3>Bantuan 24/7</h3>
+        <p>Tim kami siap membantu via WhatsApp sebelum & sesudah booking.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="container">
+    <div class="section-title">
+      <h2>Kata Pelanggan Kami</h2>
+      <p>Ribuan wisatawan telah menemukan paket impian mereka</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"Sangat membantu! Saya bandingkan harga 3 platform dalam 1 halaman, langsung pilih yang termurah. Booking lancar."</p>
+        <div class="testi-author">
+          <div class="avatar">A</div>
+          <div><strong>Andini P.</strong><span>Jakarta</span></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"Katalognya rapi, informasinya lengkap. Tinggal klik langsung ke Traveloka. Hemat waktu banget!"</p>
+        <div class="testi-author">
+          <div class="avatar">R</div>
+          <div><strong>Rizky A.</strong><span>Surabaya</span></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"Recommend banget untuk yang mau liburan ke Bali. Paketnya banyak, harga transparan, dan prosesnya jelas."</p>
+        <div class="testi-author">
+          <div class="avatar">S</div>
+          <div><strong>Sarah M.</strong><span>Bandung</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="blog" id="blog">
+  <div class="container">
+    <div class="section-title">
+      <h2>Artikel & Tips Travel</h2>
+      <p>Inspirasi dan panduan liburan ke Bali</p>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card">
+        <div class="blog-img" style="background-image:url('https://images.unsplash.com/photo-1531592937781-344ad608fabf?w=600&q=80')"></div>
+        <div class="blog-body">
+          <span class="blog-tag">Tips Travel</span>
+          <h3>10 Aktivitas Wajib di Ubud yang Bikin Liburan Tak Terlupakan</h3>
+          <p>Dari sawah Tegalalang hingga monkey forest, ini dia spot terbaik di Ubud.</p>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-img" style="background-image:url('https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=600&q=80')"></div>
+        <div class="blog-body">
+          <span class="blog-tag">Destinasi</span>
+          <h3>Panduan Lengkap ke Nusa Penida: Biaya, Rute, dan Tips Hemat</h3>
+          <p>Semua yang perlu Anda tahu sebelum berangkat ke pulau eksotis ini.</p>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-img" style="background-image:url('https://images.unsplash.com/photo-1544644181-1484b3fdfc62?w=600&q=80')"></div>
+        <div class="blog-body">
+          <span class="blog-tag">Kuliner</span>
+          <h3>7 Makanan Khas Bali yang Wajib Dicoba Saat Berkunjung</h3>
+          <p>Dari babi guling hingga lawar, ini kuliner legendaris yang bikin nagih.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="kontak">
+  <div class="container">
+    <h2>Siap Merencanakan Liburan ke Bali?</h2>
+    <p>Jelajahi katalog kami, bandingkan harga dari mitra resmi, dan booking dengan aman.</p>
+    <a href="#paket" class="btn btn-primary">Lihat Semua Paket</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Bali<span>Trips</span></div>
+        <p style="color:#94a3b8; font-size:13px;">Katalog paket tour, hotel, aktivitas, dan transportasi Bali. Booking aman melalui mitra resmi.</p>
+      </div>
+      <div>
+        <h4>Jelajahi</h4>
+        <ul>
+          <li><a href="#paket">Paket Tour</a></li>
+          <li><a href="#kategori">Hotel</a></li>
+          <li><a href="#kategori">Aktivitas</a></li>
+          <li><a href="#kategori">Transportasi</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Informasi</h4>
+        <ul>
+          <li><a href="#">Tentang Kami</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#">Syarat & Ketentuan</a></li>
+          <li><a href="#">Kebijakan Privasi</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontak</h4>
+        <ul>
+          <li>📍 Badung, Bali</li>
+          <li>📱 +62 812-3456-7890</li>
+          <li>✉️ hello@balitrips.id</li>
+        </ul>
+      </div>
+    </div>
+    <div class="disclaimer">
+      <strong>Disclaimer:</strong> Kami dapat menerima komisi dari booking yang dilakukan melalui link mitra, tanpa biaya tambahan bagi Anda. Harga dan ketersediaan mengikuti platform mitra masing-masing.
+    </div>
+    <div class="footer-bottom">
+      © 2025 BaliTrips. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING WA -->
+<a href="https://wa.me/6281234567890" class="float-wa" target="_blank" title="Hubungi kami via WhatsApp">💬</a>
+
+<!-- SCRIPT -->
+<script>
+const packages = [
+  { name: "Bali Sunrise Kintamani + Ubud Tour", dur: "1 Hari", dest: "Kintamani", price: "550.000", partner: "Traveloka", badge: "Best Seller", img: "photo-1537996194471-e657df975ab4" },
+  { name: "Nusa Penida One Day Tour", dur: "1 Hari", dest: "Nusa Penida", price: "750.000", partner: "tiket.com", badge: "Promo", img: "photo-1518548419970-58e3b4079ab2" },
+  { name: "Ubud Cultural & Rice Terrace", dur: "1 Hari", dest: "Ubud", price: "480.000", partner: "Traveloka", badge: "", img: "photo-1531592937781-344ad608fabf" },
+  { name: "Uluwatu Sunset + Kecak Dance", dur: "Half Day", dest: "Uluwatu", price: "350.000", partner: "tiket.com", badge: "Best Seller", img: "photo-1544644181-1484b3fdfc62" },
+  { name: "Private Bali Car Charter 10 Jam", dur: "10 Jam", dest: "Bali", price: "650.000", partner: "Booking.com", badge: "", img: "photo-1507525428034-b723cf961d3e" },
+  { name: "Mount Batur Sunrise Trekking", dur: "1 Hari", dest: "Kintamani", price: "890.000", partner: "Agoda", badge: "Baru", img: "photo-1571896349842-33c89424de2d" }
+];
+
+const grid = document.getElementById('pkgGrid');
+packages.forEach(p => {
+  grid.innerHTML += `
+    <div class="pkg-card">
+      <div class="pkg-img" style="background-image:url('https://images.unsplash.com/${p.img}?w=600&q=80')">
+        ${p.badge ? `<div class="pkg-badge">${p.badge}</div>` : ''}
+        <div class="pkg-partner">via ${p.partner}</div>
+      </div>
+      <div class="pkg-body">
+        <h3>${p.name}</h3>
+        <div class="pkg-meta">
+          <span>⏱ ${p.dur}</span>
+          <span>📍 ${p.dest}</span>
+        </div>
+        <div class="pkg-footer">
+          <div class="pkg-price">
+            Mulai dari
+            <strong>Rp ${p.price}</strong>
+          </div>
+          <a href="#" class="btn btn-primary">Pesan</a>
+        </div>
+      </div>
+    </div>
+  `;
+});
+
+// Filter tabs
+document.querySelectorAll('.filter-tabs button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-tabs button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById('menu').classList.remove('open');
+    }
+  });
+});
+</script>
+</body>
+</html>
